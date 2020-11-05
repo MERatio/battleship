@@ -1,0 +1,126 @@
+const gameboard = (size) => {
+	const _matrix = (size) => {
+		const matrix = [];
+		for (let i = 0; i < size; i++) {
+			matrix.push(new Array(size).fill(null));
+		}
+		return matrix;
+	};
+
+	const gameboard = _matrix(size);
+	const ships = [];
+
+	const _containsInvalidCoordinates = (...coors) => {
+		return coors.some((coor) => coor < 0 || coor > size - 1);
+	};
+
+	const _isCellVacant = (cell) => {
+		return cell === null || cell === undefined;
+	};
+
+	const _isCellValid = (row, col) => {
+		if (
+			_containsInvalidCoordinates(row, col) ||
+			!_isCellVacant(gameboard[row][col])
+		) {
+			return false;
+		}
+		for (let i = row - 1; i <= row + 1; i++) {
+			for (let j = col - 1; j <= col + 1; j++) {
+				if (_containsInvalidCoordinates(i, j)) {
+					continue;
+				}
+				if (!_isCellVacant(gameboard[i][j])) {
+					return false;
+				}
+			}
+		}
+		return true;
+	};
+
+	const _isPlacementValid = (shipLength, isHorizontal, row, col) => {
+		for (let i = 0; i < shipLength; i++) {
+			if (isHorizontal) {
+				if (!_isCellValid(row, col + i)) {
+					return false;
+				}
+			} else {
+				if (!_isCellValid(row + i, col)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	};
+
+	const _placeParts = (parts, isHorizontal, row, col) => {
+		for (let i = 0; i < parts.length; i++) {
+			if (isHorizontal) {
+				gameboard[row][col + i] = parts[i];
+			} else {
+				gameboard[row + i][col] = parts[i];
+			}
+		}
+	};
+
+	const _isMissedCell = (cell) => {
+		return cell === 'missed';
+	};
+
+	const _isFunctionalPart = (part) => {
+		return !part.isHit;
+	};
+
+	const _isValidCellToAttack = (cell) => {
+		if (_isMissedCell(cell)) {
+			return false;
+		}
+		return _isCellVacant(cell) || _isFunctionalPart(cell);
+	};
+
+	const _findShip = (shipId) => {
+		return ships.find((ship) => ship.id === shipId);
+	};
+
+	const getGameboard = () => gameboard;
+
+	const getShips = () => ships;
+
+	const placeShip = (ship, isHorizontal, row, col) => {
+		if (_isPlacementValid(ship.length, isHorizontal, row, col)) {
+			ships.push(ship);
+			_placeParts(ship.parts, isHorizontal, row, col);
+			return true;
+		}
+		return false;
+	};
+
+	const receiveAttack = (row, col) => {
+		const cell = gameboard[row][col];
+		if (_isValidCellToAttack(cell)) {
+			if (_isCellVacant(cell)) {
+				gameboard[row][col] = 'missed';
+			} else if (_isFunctionalPart(cell)) {
+				const ship = _findShip(cell.shipId);
+				ship.hit(cell.index);
+			}
+			return true;
+		}
+		return false;
+	};
+
+	const areAllShipsDestroyed = () => {
+		return ships.every((ship) => ship.isSunk());
+	};
+
+	return {
+		size,
+		getGameboard,
+		getShips,
+		placeShip,
+		receiveAttack,
+		areAllShipsDestroyed,
+	};
+};
+
+export default gameboard;
