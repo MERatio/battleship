@@ -1,7 +1,7 @@
 {
-	"name": "Battlefield",
+	"name": "Battleship",
 	"version": "1.0.0",
-	"description": "Battlefield game",
+	"description": "Battleship game",
 	"private": true,
 	"scripts": {
 		"test": "jest --watchAll",
