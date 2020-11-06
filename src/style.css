@@ -1,3 +1,27 @@
-p {
-	color: red;
+:root {
+	--alizarin: #e74c3c;
+}
+
+* {
+	box-sizing: inherit;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+.app {
+	height: 100vh;
+}
+
+.gameboards {
+	display: flex;
+	justify-content: space-evenly;
 }
