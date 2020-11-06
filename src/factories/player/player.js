@@ -1,4 +1,4 @@
-import game from '../../modules/game';
+import game from '../../modules/helpers/helpers';
 
 const player = () => {
 	const randomPlaceShips = (ownGameboard) => {

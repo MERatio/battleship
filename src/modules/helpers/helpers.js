@@ -1,6 +1,6 @@
-import ship from '../factories/ship/ship';
+import ship from '../../factories/ship/ship';
 
-const game = (() => {
+const helpers = (() => {
 	const _shipCreator = (length, quantity) => {
 		const ships = [];
 		for (let i = 0; i < quantity; i++) {
@@ -22,4 +22,4 @@ const game = (() => {
 	return { getShips };
 })();
 
-export default game;
+export default helpers;
