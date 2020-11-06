@@ -19,7 +19,24 @@ const helpers = (() => {
 		return ships;
 	};
 
-	return { getShips };
+	const isCellVacant = (cell) => {
+		return cell === null || cell === undefined;
+	};
+
+	const isMissedCell = (cell) => {
+		return cell === 'missed';
+	};
+
+	const isFunctionalPart = (part) => {
+		return !part.isHit;
+	};
+
+	return {
+		getShips,
+		isCellVacant,
+		isMissedCell,
+		isFunctionalPart,
+	};
 })();
 
 export default helpers;

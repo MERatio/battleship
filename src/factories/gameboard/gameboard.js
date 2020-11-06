@@ -1,3 +1,5 @@
+import helpers from '../../modules/helpers/helpers';
+
 const gameboard = (size) => {
 	const _matrix = (size) => {
 		const matrix = [];
@@ -14,14 +16,10 @@ const gameboard = (size) => {
 		return coors.some((coor) => coor < 0 || coor > size - 1);
 	};
 
-	const _isCellVacant = (cell) => {
-		return cell === null || cell === undefined;
-	};
-
 	const _isCellValid = (row, col) => {
 		if (
 			_containsInvalidCoordinates(row, col) ||
-			!_isCellVacant(gameboard[row][col])
+			!helpers.isCellVacant(gameboard[row][col])
 		) {
 			return false;
 		}
@@ -30,7 +28,7 @@ const gameboard = (size) => {
 				if (_containsInvalidCoordinates(i, j)) {
 					continue;
 				}
-				if (!_isCellVacant(gameboard[i][j])) {
+				if (!helpers.isCellVacant(gameboard[i][j])) {
 					return false;
 				}
 			}
@@ -63,19 +61,11 @@ const gameboard = (size) => {
 		}
 	};
 
-	const _isMissedCell = (cell) => {
-		return cell === 'missed';
-	};
-
-	const _isFunctionalPart = (part) => {
-		return !part.isHit;
-	};
-
 	const _isValidCellToAttack = (cell) => {
-		if (_isMissedCell(cell)) {
+		if (helpers.isMissedCell(cell)) {
 			return false;
 		}
-		return _isCellVacant(cell) || _isFunctionalPart(cell);
+		return helpers.isCellVacant(cell) || helpers.isFunctionalPart(cell);
 	};
 
 	const _findShip = (shipId) => {
@@ -98,9 +88,9 @@ const gameboard = (size) => {
 	const receiveAttack = (row, col) => {
 		const cell = gameboard[row][col];
 		if (_isValidCellToAttack(cell)) {
-			if (_isCellVacant(cell)) {
+			if (helpers.isCellVacant(cell)) {
 				gameboard[row][col] = 'missed';
-			} else if (_isFunctionalPart(cell)) {
+			} else if (helpers.isFunctionalPart(cell)) {
 				const ship = _findShip(cell.shipId);
 				ship.hit(cell.index);
 			}
