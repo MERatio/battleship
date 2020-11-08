@@ -31,11 +31,24 @@ const helpers = (() => {
 		return !part.isHit;
 	};
 
+	const isValidCellToAttack = (cell) => {
+		if (helpers.isMissedCell(cell)) {
+			return false;
+		}
+		return helpers.isCellVacant(cell) || helpers.isFunctionalPart(cell);
+	};
+
+	const isPartHit = (part) => {
+		return part.isHit;
+	};
+
 	return {
 		getShips,
 		isCellVacant,
 		isMissedCell,
 		isFunctionalPart,
+		isValidCellToAttack,
+		isPartHit,
 	};
 })();
 

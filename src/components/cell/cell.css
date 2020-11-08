@@ -1,11 +1,32 @@
 .cell {
+	position: relative;
 	width: 4rem;
 	height: 4rem;
 	border: 1px solid var(--belize-hole);
 }
 
+.missed-cell {
+}
+
+.hit-part {
+	background-color: var(--alizarin);
+}
+
+.missed-cell:after,
+.hit-part:after {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	content: '\274c'; /* use the hex value here... */
+	font-size: 4rem;
+	line-height: 4rem;
+	text-align: center;
+}
+
 .functional-part {
-	background-color: var(--peter-river);
+	background-color: var(--emerald);
 }
 
 /* Media queries */

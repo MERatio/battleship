@@ -4,3 +4,8 @@
 	grid-template-columns: repeat(10, max-content);
 	border: 1px solid var(--belize-hole);
 }
+
+.disabled-gameboard {
+	pointer-events: none;
+	opacity: 0.4;
+}

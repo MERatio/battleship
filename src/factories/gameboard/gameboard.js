@@ -61,13 +61,6 @@ const gameboard = (size) => {
 		}
 	};
 
-	const _isValidCellToAttack = (cell) => {
-		if (helpers.isMissedCell(cell)) {
-			return false;
-		}
-		return helpers.isCellVacant(cell) || helpers.isFunctionalPart(cell);
-	};
-
 	const _findShip = (shipId) => {
 		return ships.find((ship) => ship.id === shipId);
 	};
@@ -87,7 +80,7 @@ const gameboard = (size) => {
 
 	const receiveAttack = (row, col) => {
 		const cell = gameboard[row][col];
-		if (_isValidCellToAttack(cell)) {
+		if (helpers.isValidCellToAttack(cell)) {
 			if (helpers.isCellVacant(cell)) {
 				gameboard[row][col] = 'missed';
 			} else if (helpers.isFunctionalPart(cell)) {
