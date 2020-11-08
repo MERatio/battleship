@@ -13,7 +13,8 @@
 }
 
 .missed-cell:after,
-.hit-part:after {
+.hit-part:after,
+.ship-destroyed:after {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -27,6 +28,10 @@
 
 .functional-part {
 	background-color: var(--emerald);
+}
+
+.ship-destroyed {
+	background-color: var(--wet-asphalt);
 }
 
 /* Media queries */

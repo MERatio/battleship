@@ -16,10 +16,17 @@ const gameboard = (
 	} else {
 		gameboardDiv.classList.remove('disabled-gameboard');
 	}
-	gameboardObj.forEach((row, rowIndex) => {
+	gameboardObj.getGameboard().forEach((row, rowIndex) => {
 		row.forEach((col, colIndex) => {
 			gameboardDiv.appendChild(
-				cell(col, isMainPlayer, rowIndex, colIndex, handleCellAttack)
+				cell(
+					col,
+					gameboardObj,
+					isMainPlayer,
+					rowIndex,
+					colIndex,
+					handleCellAttack
+				)
 			);
 		});
 	});

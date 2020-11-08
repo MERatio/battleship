@@ -1,7 +1,7 @@
 import './cell.css';
 import helpers from '../../modules/helpers/helpers';
 
-const cell = (cell, isMainPlayer, row, col, handleCellAttack) => {
+const cell = (cell, gameboardObj, isMainPlayer, row, col, handleCellAttack) => {
 	const cellDiv = document.createElement('div');
 	cellDiv.classList.add('cell');
 	cellDiv.dataset.row = row;
@@ -13,10 +13,11 @@ const cell = (cell, isMainPlayer, row, col, handleCellAttack) => {
 			if (isMainPlayer) {
 				cellDiv.classList.add('functional-part');
 			}
+		} else if (helpers.isShipDestroyed(cell, gameboardObj)) {
+			cellDiv.classList.add('ship-destroyed');
 		} else if (helpers.isPartHit(cell)) {
 			cellDiv.classList.add('hit-part');
 		}
-		// TODO render ship destroyed
 	}
 	if (!isMainPlayer) {
 		cellDiv.onclick = handleCellAttack;

@@ -19,13 +19,7 @@ const dom = (() => {
 	) => {
 		renderTo.innerHTML = '';
 		renderTo.appendChild(
-			gameboard(
-				gameboardObj.getGameboard(),
-				name,
-				isDisabled,
-				isMainPlayer,
-				handleCellAttack
-			)
+			gameboard(gameboardObj, name, isDisabled, isMainPlayer, handleCellAttack)
 		);
 	};
 

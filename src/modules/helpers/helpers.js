@@ -42,6 +42,12 @@ const helpers = (() => {
 		return part.isHit;
 	};
 
+	const isShipDestroyed = (part, gameboard) => {
+		const shipId = part.shipId;
+		const ship = gameboard.findShip(shipId);
+		return ship.isSunk();
+	};
+
 	return {
 		getShips,
 		isCellVacant,
@@ -49,6 +55,7 @@ const helpers = (() => {
 		isFunctionalPart,
 		isValidCellToAttack,
 		isPartHit,
+		isShipDestroyed,
 	};
 })();
 

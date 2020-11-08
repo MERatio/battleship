@@ -61,7 +61,7 @@ const gameboard = (size) => {
 		}
 	};
 
-	const _findShip = (shipId) => {
+	const findShip = (shipId) => {
 		return ships.find((ship) => ship.id === shipId);
 	};
 
@@ -84,7 +84,7 @@ const gameboard = (size) => {
 			if (helpers.isCellVacant(cell)) {
 				gameboard[row][col] = 'missed';
 			} else if (helpers.isFunctionalPart(cell)) {
-				const ship = _findShip(cell.shipId);
+				const ship = findShip(cell.shipId);
 				ship.hit(cell.index);
 			}
 			return true;
@@ -98,6 +98,7 @@ const gameboard = (size) => {
 
 	return {
 		size,
+		findShip,
 		getGameboard,
 		getShips,
 		placeShip,
