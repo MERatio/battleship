@@ -1,17 +1,14 @@
 import './gameboard.css';
+import cell from '../cell/cell';
 
-const gameboard = (gameboardObj) => {
+const gameboard = (gameboardObj, isMainPlayer) => {
 	const gameboardDiv = document.createElement('div');
 	gameboardDiv.classList.add('gameboard');
-
 	gameboardObj.forEach((row) => {
 		row.forEach((col) => {
-			const cellDiv = document.createElement('div');
-			cellDiv.classList.add('cell');
-			gameboardDiv.appendChild(cellDiv);
+			gameboardDiv.appendChild(cell(col, isMainPlayer));
 		});
 	});
-
 	return gameboardDiv;
 };
 

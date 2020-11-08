@@ -1,0 +1,39 @@
+.cell {
+	width: 4rem;
+	height: 4rem;
+	border: 1px solid var(--belize-hole);
+}
+
+.functional-part {
+	background-color: var(--peter-river);
+}
+
+/* Media queries */
+
+/* 900px */
+@media only screen and (max-width: 56.25em) {
+	html {
+		font-size: 50%;
+	}
+}
+
+/* 700px */
+@media only screen and (max-width: 43.75em) {
+	html {
+		font-size: 40%;
+	}
+}
+
+/* 560px */
+@media only screen and (max-width: 35em) {
+	html {
+		font-size: 30%;
+	}
+}
+
+/* 400px */
+@media only screen and (max-width: 25em) {
+	html {
+		font-size: 25%;
+	}
+}
