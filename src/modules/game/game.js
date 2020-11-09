@@ -55,14 +55,14 @@ const game = (() => {
 		);
 	};
 
-	const _newRound = (isFirstRound) => {
+	const _newRound = (isFirstRound, isNewPlayer) => {
 		winner = _getWinner(gameboard1, gameboard2);
 		if (winner) {
 			_updateGameboard();
 			// TODO: announce winner
 			const winnerText = winner === player1 ? 'player1' : 'player2';
 			console.log(`Winner is ${winnerText}`);
-		} else {
+		} else if (isNewPlayer) {
 			if (!isFirstRound) {
 				_switchActivePlayer();
 			}
@@ -70,9 +70,11 @@ const game = (() => {
 			if (activePlayer === player2) {
 				setTimeout(() => {
 					player2.randomAttack(gameboard1);
-					_newRound(false);
+					_newRound(false, true);
 				}, 500);
 			}
+		} else {
+			_updateGameboard();
 		}
 	};
 
@@ -81,29 +83,18 @@ const game = (() => {
 			return;
 		}
 		const target = e.target;
-		const gameboardName = target.dataset.gameboardName;
 		const row = target.dataset.row;
 		const col = target.dataset.col;
-		let gameboard;
-		let cell;
-
-		if (gameboardName === 'gameboard1') {
-			gameboard = gameboard1;
-			cell = gameboard1.getGameboard()[row][col];
-		} else {
-			gameboard = gameboard2;
-			cell = gameboard2.getGameboard()[row][col];
-		}
-
+		const cell = activeGameboard.getGameboard()[row][col];
 		if (helpers.isValidCellToAttack(cell)) {
-			gameboard.receiveAttack(row, col);
-			_newRound(false);
+			const itHit = activePlayer.attack(activeGameboard, row, col);
+			_newRound(false, !itHit);
 		}
 	};
 
 	const init = () => {
 		_randomPlaceShips();
-		_newRound(true);
+		_newRound(true, true);
 	};
 
 	return { init, handleCellAttack };
