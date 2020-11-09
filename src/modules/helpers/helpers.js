@@ -39,7 +39,11 @@ const helpers = (() => {
 	};
 
 	const isPartHit = (part) => {
-		return part.isHit;
+		if (isCellVacant(part) || isMissedCell(part) || isFunctionalPart(part)) {
+			return false;
+		} else {
+			return part.isHit;
+		}
 	};
 
 	const isShipDestroyed = (part, gameboard) => {

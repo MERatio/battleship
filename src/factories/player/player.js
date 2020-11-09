@@ -1,8 +1,8 @@
-import game from '../../modules/helpers/helpers';
+import helpers from '../../modules/helpers/helpers';
 
 const player = () => {
 	const randomPlaceShips = (ownGameboard) => {
-		for (let ship of game.getShips()) {
+		for (let ship of helpers.getShips()) {
 			let isShipPlaced = false;
 			let direction = true;
 			while (!isShipPlaced) {
@@ -23,9 +23,16 @@ const player = () => {
 		}
 	};
 
+	const attack = (enemyGameboard, row, col) => {
+		enemyGameboard.receiveAttack(row, col);
+		const cell = enemyGameboard.getGameboard()[row][col];
+		return helpers.isPartHit(cell);
+	};
+
 	return {
 		randomPlaceShips,
 		randomAttack,
+		attack,
 	};
 };
 

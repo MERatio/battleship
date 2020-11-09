@@ -6,12 +6,14 @@ let playerBoard;
 let aiBoard;
 let playerObj;
 let aiObj;
+let aiShip1;
 
 beforeEach(() => {
 	playerBoard = gameboard(10);
 	aiBoard = gameboard(10);
 	playerObj = player();
 	aiObj = player();
+	aiShip1 = ship(4);
 });
 
 test('player randomPlaceShips method', () => {
@@ -37,4 +39,20 @@ test('player randomAttack method', () => {
 	});
 	expect(missedAttack).toBe(80);
 	expect(hitCounter).toBe(20);
+});
+
+describe('player attack method', () => {
+	test('attacks enemy gameboard', () => {
+		expect(aiBoard.placeShip(aiShip1, true, 0, 0)).toBe(true);
+		const shipsFirstPart = aiShip1.parts[0];
+		expect(shipsFirstPart.isHit).toBe(false);
+		expect(playerObj.attack(aiBoard, 0, 0)).toBe(true);
+		expect(shipsFirstPart.isHit).toBe(true);
+	});
+
+	test('return true if it hit a ship', () => {
+		expect(playerObj.attack(aiBoard, 2, 2)).toBe(false);
+		expect(aiBoard.placeShip(aiShip1, true, 0, 0)).toBe(true);
+		expect(playerObj.attack(aiBoard, 0, 0)).toBe(true);
+	});
 });
