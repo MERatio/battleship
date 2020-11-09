@@ -94,7 +94,7 @@ const game = (() => {
 		_newRound(true, true);
 	};
 
-	return { init, handleCellAttack };
+	return { init };
 })();
 
 export default game;
