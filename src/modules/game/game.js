@@ -59,9 +59,8 @@ const game = (() => {
 		winner = _getWinner(gameboard1, gameboard2);
 		if (winner) {
 			_updateGameboard();
-			// TODO: announce winner
 			const winnerText = winner === player1 ? 'player1' : 'player2';
-			console.log(`Winner is ${winnerText}`);
+			alert(`Winner is ${winnerText}`);
 			return;
 		}
 		if (!isFirstRound && isNewPlayer) {
