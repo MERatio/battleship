@@ -62,20 +62,18 @@ const game = (() => {
 			// TODO: announce winner
 			const winnerText = winner === player1 ? 'player1' : 'player2';
 			console.log(`Winner is ${winnerText}`);
-		} else if (isNewPlayer) {
-			if (!isFirstRound) {
-				_switchActivePlayer();
-			}
-			_updateGameboard();
-			if (activePlayer === player2) {
-				setTimeout(() => {
-					player2.randomAttack(gameboard1);
-					_newRound(false, true);
-				}, 500);
-			}
-		} else {
-			_updateGameboard();
+			return;
 		}
+		if (!isFirstRound && isNewPlayer) {
+			_switchActivePlayer();
+		}
+		if (activePlayer === player2) {
+			setTimeout(() => {
+				const itHit = player2.randomAttack(gameboard1);
+				_newRound(false, !itHit);
+			}, 500);
+		}
+		_updateGameboard();
 	};
 
 	const handleCellAttack = (e) => {
