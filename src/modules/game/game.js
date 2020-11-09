@@ -62,22 +62,24 @@ const game = (() => {
 			// TODO: announce winner
 			const winnerText = winner === player1 ? 'player1' : 'player2';
 			console.log(`Winner is ${winnerText}`);
-			// TODO: prevent user from clicking the gameboard if there is a winner
 		} else {
 			if (!isFirstRound) {
 				_switchActivePlayer();
 			}
 			_updateGameboard();
-		}
-		if (activePlayer === player2) {
-			setTimeout(() => {
-				player2.randomAttack(gameboard1);
-				_newRound(false);
-			}, 500);
+			if (activePlayer === player2) {
+				setTimeout(() => {
+					player2.randomAttack(gameboard1);
+					_newRound(false);
+				}, 500);
+			}
 		}
 	};
 
 	const handleCellAttack = (e) => {
+		if (winner) {
+			return;
+		}
 		const target = e.target;
 		const gameboardName = target.dataset.gameboardName;
 		const row = target.dataset.row;
