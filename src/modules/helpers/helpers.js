@@ -52,6 +52,13 @@ const helpers = (() => {
 		return ship.isSunk();
 	};
 
+	const isShip = (cell) => {
+		if (isCellVacant(cell) || isMissedCell(cell)) {
+			return false;
+		}
+		return !!cell.shipId;
+	};
+
 	return {
 		getShips,
 		isCellVacant,
