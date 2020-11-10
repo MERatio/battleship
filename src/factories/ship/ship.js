@@ -15,6 +15,7 @@ const ship = (length) => {
 	return {
 		id,
 		length,
+		isHorizontal: true,
 		parts: _getParts(length),
 		hit(index) {
 			this.parts[index].hit();

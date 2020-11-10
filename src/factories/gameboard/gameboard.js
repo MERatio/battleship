@@ -69,10 +69,10 @@ const gameboard = (size) => {
 
 	const getShips = () => ships;
 
-	const placeShip = (ship, isHorizontal, row, col) => {
-		if (_isPlacementValid(ship.length, isHorizontal, row, col)) {
+	const placeShip = (ship, row, col) => {
+		if (_isPlacementValid(ship.length, ship.isHorizontal, row, col)) {
 			ships.push(ship);
-			_placeParts(ship.parts, isHorizontal, row, col);
+			_placeParts(ship.parts, ship.isHorizontal, row, col);
 			return true;
 		}
 		return false;

@@ -9,6 +9,7 @@ beforeEach(() => {
 test('ship properties', () => {
 	expect(shipObj.id).toBeTruthy();
 	expect(shipObj.length).toBe(4);
+	expect(shipObj.isHorizontal).toBe(true);
 	expect(shipObj.parts.length).toBe(4);
 	const isAllFunctional = (part) => part.isHit === false;
 	expect(shipObj.parts.every(isAllFunctional)).toBe(true);

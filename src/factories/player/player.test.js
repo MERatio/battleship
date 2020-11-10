@@ -43,7 +43,7 @@ test('player randomAttack method', () => {
 
 describe('player attack method', () => {
 	test('attacks enemy gameboard', () => {
-		expect(aiBoard.placeShip(aiShip1, true, 0, 0)).toBe(true);
+		expect(aiBoard.placeShip(aiShip1, 0, 0)).toBe(true);
 		const shipsFirstPart = aiShip1.parts[0];
 		expect(shipsFirstPart.isHit).toBe(false);
 		expect(playerObj.attack(aiBoard, 0, 0)).toBe(true);
@@ -52,7 +52,7 @@ describe('player attack method', () => {
 
 	test('return true if it hit a ship', () => {
 		expect(playerObj.attack(aiBoard, 2, 2)).toBe(false);
-		expect(aiBoard.placeShip(aiShip1, true, 0, 0)).toBe(true);
+		expect(aiBoard.placeShip(aiShip1, 0, 0)).toBe(true);
 		expect(playerObj.attack(aiBoard, 0, 0)).toBe(true);
 	});
 });
