@@ -28,7 +28,7 @@ const helpers = (() => {
 	};
 
 	const isFunctionalPart = (part) => {
-		return !part.isHit;
+		return isPart(part) && !part.isHit;
 	};
 
 	const isValidCellToAttack = (cell) => {
@@ -39,11 +39,7 @@ const helpers = (() => {
 	};
 
 	const isPartHit = (part) => {
-		if (isCellVacant(part) || isMissedCell(part) || isFunctionalPart(part)) {
-			return false;
-		} else {
-			return part.isHit;
-		}
+		return isPart(part) && part.isHit;
 	};
 
 	const isShipDestroyed = (part, gameboard) => {
@@ -52,7 +48,7 @@ const helpers = (() => {
 		return ship.isSunk();
 	};
 
-	const isShip = (cell) => {
+	const isPart = (cell) => {
 		if (isCellVacant(cell) || isMissedCell(cell)) {
 			return false;
 		}
@@ -67,6 +63,7 @@ const helpers = (() => {
 		isValidCellToAttack,
 		isPartHit,
 		isShipDestroyed,
+		isPart,
 	};
 })();
 
