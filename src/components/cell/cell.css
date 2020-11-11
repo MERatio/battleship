@@ -1,37 +1,67 @@
+:root {
+	--belize-hole: #2980b9;
+	--emerald: #2ecc71;
+	--nephritis: #27ae60;
+	--alizarin: #e74c3c;
+	--wet-asphalt: #34495e;
+	--cell-size: 4rem;
+}
+
 .cell {
 	position: relative;
-	width: 4rem;
-	height: 4rem;
+	width: var(--cell-size);
+	height: var(--cell-size);
 	border: 1px solid var(--belize-hole);
 }
 
-.missed-cell {
+.cell-missed {
 }
 
-.hit-part {
+.ship {
+	position: absolute;
+	z-index: 99;
+	display: grid;
+}
+
+.ship-disable-click {
+	pointer-events: none;
+}
+
+.ship-vertical {
+	grid-auto-flow: column;
+}
+
+.ship-sunk > .part {
+	background-color: var(--wet-asphalt);
+}
+
+.part {
+	position: relative;
+	width: var(--cell-size);
+	height: var(--cell-size);
+}
+
+.part-functional {
+	background-color: var(--emerald);
+	border: 1px solid var(--nephritis);
+}
+
+.part-hit {
 	background-color: var(--alizarin);
 }
 
-.missed-cell:after,
-.hit-part:after,
-.ship-destroyed:after {
+.cell-missed:after,
+.part-hit:after,
+.ship-sunk > *:after {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	content: '\274c'; /* use the hex value here... */
-	font-size: 4rem;
-	line-height: 4rem;
+	font-size: var(--cell-size);
+	line-height: var(--cell-size);
 	text-align: center;
-}
-
-.functional-part {
-	background-color: var(--emerald);
-}
-
-.ship-destroyed {
-	background-color: var(--wet-asphalt);
 }
 
 /* Media queries */
