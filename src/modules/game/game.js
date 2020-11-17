@@ -78,6 +78,13 @@ const game = (() => {
 		_updateGameboard();
 	};
 
+	const _handleRandomiseClick = () => {
+		gameboard1.emptyGameboard();
+		player1.randomPlaceShips(gameboard1);
+		dom.renderGameboard(playersInfo.player1);
+		dom.enableGameboard('gameboard1');
+	};
+
 	const handleCellAttack = (e) => {
 		if (winner) {
 			return;
@@ -94,12 +101,12 @@ const game = (() => {
 
 	const handleStartClick = () => {
 		_newRound(true, true);
-		dom.removeOptions(handleStartClick);
+		dom.removeOptions(handleStartClick, _handleRandomiseClick);
 	};
 
 	const init = () => {
 		_randomPlaceShips(gameboard1, gameboard2);
-		dom.init(playersInfo, handleStartClick);
+		dom.init(playersInfo, handleStartClick, _handleRandomiseClick);
 	};
 
 	return { init };

@@ -96,6 +96,17 @@ const gameboard = (size) => {
 		return ships.every((ship) => ship.isSunk());
 	};
 
+	const emptyGameboard = () => {
+		for (let i = 0; i < gameboard.length; i++) {
+			for (let j = 0; j < gameboard[i].length; j++) {
+				if (gameboard[i][j]) {
+					gameboard[i][j] = null;
+				}
+			}
+		}
+		ships.length = 0;
+	};
+
 	return {
 		size,
 		findShip,
@@ -104,6 +115,7 @@ const gameboard = (size) => {
 		placeShip,
 		receiveAttack,
 		areAllShipsDestroyed,
+		emptyGameboard,
 	};
 };
 

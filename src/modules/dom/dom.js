@@ -9,6 +9,7 @@ const dom = (() => {
 	const gameboard1Container = document.querySelector('.gameboard1Container');
 	const gameboard2Container = document.querySelector('.gameboard2Container');
 	const start = document.getElementById('start');
+	const randomise = document.getElementById('randomise');
 
 	const renderGameboard = (playerInfo, handleCellAttack = null) => {
 		playerInfo.renderTo.innerHTML = '';
@@ -28,26 +29,30 @@ const dom = (() => {
 		gameboardDiv.classList.add('disabled-gameboard');
 	};
 
-	const _enableGameboard = (gameboardName) => {
+	const enableGameboard = (gameboardName) => {
 		const gameboardDiv = body.querySelector(`[data-name=${gameboardName}]`);
 		gameboardDiv.classList.remove('disabled-gameboard');
 	};
 
-	const removeOptions = (handleStartClick) => {
+	const removeOptions = (handleStartClick, handleRandomiseClick) => {
 		start.removeEventListener('click', handleStartClick);
 		start.remove();
+		randomise.removeEventListener('click', handleRandomiseClick);
+		randomise.remove();
 	};
 
-	const init = (playersInfo, handleStartClick) => {
+	const init = (playersInfo, handleStartClick, handleRandomiseClick) => {
 		dom.renderGameboard(playersInfo.player1);
-		_enableGameboard('gameboard1');
+		enableGameboard('gameboard1');
 		start.addEventListener('click', handleStartClick);
+		randomise.addEventListener('click', handleRandomiseClick);
 	};
 
 	return {
 		gameboard1Container,
 		gameboard2Container,
 		renderGameboard,
+		enableGameboard,
 		removeOptions,
 		init,
 	};
