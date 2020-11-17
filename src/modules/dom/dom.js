@@ -10,31 +10,17 @@ const dom = (() => {
 	const gameboard2Container = document.querySelector('.gameboard2Container');
 	const start = document.getElementById('start');
 
-	const _renderGameboard = (
-		gameboardObj,
-		renderTo,
-		name,
-		isDisabled,
-		isMainPlayer,
-		handleCellAttack
-	) => {
-		renderTo.innerHTML = '';
-		renderTo.appendChild(
-			gameboard(gameboardObj, name, isDisabled, isMainPlayer, handleCellAttack)
-		);
-	};
-
-	const renderGameboards = (gameboardsData, handleCellAttack = null) => {
-		for (let playerName in gameboardsData) {
-			_renderGameboard(
-				gameboardsData[playerName].gameboard,
-				gameboardsData[playerName].renderTo,
-				gameboardsData[playerName].name,
-				gameboardsData[playerName].isDisabled(),
-				gameboardsData[playerName].isMainPlayer,
+	const renderGameboard = (playerInfo, handleCellAttack = null) => {
+		playerInfo.renderTo.innerHTML = '';
+		playerInfo.renderTo.appendChild(
+			gameboard(
+				playerInfo.gameboard,
+				playerInfo.name,
+				playerInfo.isDisabled(),
+				playerInfo.isMainPlayer,
 				handleCellAttack
-			);
-		}
+			)
+		);
 	};
 
 	const _disableGameboard = (gameboardName) => {
@@ -53,16 +39,15 @@ const dom = (() => {
 	};
 
 	const init = (playersInfo, handleStartClick) => {
-		renderGameboards(playersInfo);
+		dom.renderGameboard(playersInfo.player1);
 		_enableGameboard('gameboard1');
-		_disableGameboard('gameboard2');
 		start.addEventListener('click', handleStartClick);
 	};
 
 	return {
 		gameboard1Container,
 		gameboard2Container,
-		renderGameboards,
+		renderGameboard,
 		removeOptions,
 		init,
 	};

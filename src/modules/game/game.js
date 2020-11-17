@@ -54,7 +54,8 @@ const game = (() => {
 	};
 
 	const _updateGameboard = () => {
-		dom.renderGameboards(playersInfo, handleCellAttack);
+		dom.renderGameboard(playersInfo.player1);
+		dom.renderGameboard(playersInfo.player2, handleCellAttack);
 	};
 
 	const _newRound = (isFirstRound, isNewPlayer) => {
