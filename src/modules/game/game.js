@@ -12,8 +12,28 @@ const game = (() => {
 	let activePlayer = player1;
 	let activeGameboard = gameboard2;
 	let winner;
+	const playersInfo = {
+		player1: {
+			gameboard: gameboard1,
+			renderTo: dom.gameboard1Container,
+			name: 'gameboard1',
+			isDisabled() {
+				return activeGameboard === gameboard2;
+			},
+			isMainPlayer: mainPlayer === 'player1' ? true : false,
+		},
+		player2: {
+			gameboard: gameboard2,
+			renderTo: dom.gameboard2Container,
+			name: 'gameboard2',
+			isDisabled() {
+				return activeGameboard === gameboard1;
+			},
+			isMainPlayer: mainPlayer === 'player2' ? true : false,
+		},
+	};
 
-	const _randomPlaceShips = () => {
+	const _randomPlaceShips = (gameboard1, gameboard2) => {
 		player1.randomPlaceShips(gameboard1);
 		player2.randomPlaceShips(gameboard2);
 	};
@@ -34,25 +54,7 @@ const game = (() => {
 	};
 
 	const _updateGameboard = () => {
-		dom.renderGameboards(
-			{
-				player1: {
-					gameboard: gameboard1,
-					renderTo: dom.gameboard1Container,
-					name: 'gameboard1',
-					isDisabled: activeGameboard === gameboard2,
-					isMainPlayer: mainPlayer === 'player1' ? true : false,
-				},
-				player2: {
-					gameboard: gameboard2,
-					renderTo: dom.gameboard2Container,
-					name: 'gameboard2',
-					isDisabled: activeGameboard === gameboard1,
-					isMainPlayer: mainPlayer === 'player2' ? true : false,
-				},
-			},
-			handleCellAttack
-		);
+		dom.renderGameboards(playersInfo, handleCellAttack);
 	};
 
 	const _newRound = (isFirstRound, isNewPlayer) => {
@@ -89,9 +91,14 @@ const game = (() => {
 		}
 	};
 
-	const init = () => {
-		_randomPlaceShips();
+	const handleStartClick = () => {
 		_newRound(true, true);
+		dom.removeOptions(handleStartClick);
+	};
+
+	const init = () => {
+		_randomPlaceShips(gameboard1, gameboard2);
+		dom.init(playersInfo, handleStartClick);
 	};
 
 	return { init };

@@ -33,7 +33,7 @@ const cell = (cell, gameboardObj, isMainPlayer, row, col, handleCellAttack) => {
 			cellDiv.appendChild(shipDiv);
 		}
 	}
-	if (!isMainPlayer) {
+	if (!isMainPlayer && handleCellAttack) {
 		cellDiv.onclick = handleCellAttack;
 	}
 	return cellDiv;
