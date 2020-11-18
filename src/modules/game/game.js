@@ -78,6 +78,11 @@ const game = (() => {
 		_updateGameboard();
 	};
 
+	const _handleStartClick = () => {
+		_newRound(true, true);
+		dom.removeOptions(_handleStartClick, _handleRandomiseClick);
+	};
+
 	const _handleRandomiseClick = () => {
 		gameboard1.emptyGameboard();
 		player1.randomPlaceShips(gameboard1);
@@ -99,14 +104,9 @@ const game = (() => {
 		}
 	};
 
-	const handleStartClick = () => {
-		_newRound(true, true);
-		dom.removeOptions(handleStartClick, _handleRandomiseClick);
-	};
-
 	const init = () => {
 		_randomPlaceShips(gameboard1, gameboard2);
-		dom.init(playersInfo, handleStartClick, _handleRandomiseClick);
+		dom.init(playersInfo, _handleStartClick, _handleRandomiseClick);
 	};
 
 	return { init };
