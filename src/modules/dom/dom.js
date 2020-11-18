@@ -24,11 +24,6 @@ const dom = (() => {
 		);
 	};
 
-	const _disableGameboard = (gameboardName) => {
-		const gameboardDiv = body.querySelector(`[data-name=${gameboardName}]`);
-		gameboardDiv.classList.add('disabled-gameboard');
-	};
-
 	const enableGameboard = (gameboardName) => {
 		const gameboardDiv = body.querySelector(`[data-name=${gameboardName}]`);
 		gameboardDiv.classList.remove('disabled-gameboard');
