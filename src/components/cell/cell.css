@@ -23,10 +23,6 @@
 	display: grid;
 }
 
-.ship-disable-click {
-	pointer-events: none;
-}
-
 .ship-vertical {
 	grid-auto-flow: column;
 }

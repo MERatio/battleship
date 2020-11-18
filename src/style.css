@@ -15,6 +15,10 @@ html {
 	font-size: 62.5%;
 }
 
+.pointer-events-none {
+	pointer-events: none;
+}
+
 .app {
 	height: 100vh;
 }
