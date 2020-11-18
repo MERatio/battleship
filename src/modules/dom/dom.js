@@ -29,6 +29,11 @@ const dom = (() => {
 		gameboardDiv.classList.remove('disabled-gameboard');
 	};
 
+	const disableOwnShipsClick = () => {
+		const ownShips = document.querySelectorAll('[data-own-ship="true"]');
+		ownShips.forEach((ownShip) => ownShip.classList.add('pointer-events-none'));
+	};
+
 	const removeOptions = (handleStartClick, handleRandomiseClick) => {
 		start.removeEventListener('click', handleStartClick);
 		start.remove();
@@ -48,6 +53,7 @@ const dom = (() => {
 		gameboard2Container,
 		renderGameboard,
 		enableGameboard,
+		disableOwnShipsClick,
 		removeOptions,
 		init,
 	};

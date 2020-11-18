@@ -12,7 +12,12 @@ const cell = (cell, gameboardObj, isMainPlayer, row, col, handleCellAttack) => {
 		} else if (helpers.isPart(cell) && cell.index === 0) {
 			const shipObj = gameboardObj.findShip(cell.shipId);
 			const shipDiv = document.createElement('div');
-			shipDiv.classList.add('ship', 'pointer-events-none');
+			shipDiv.classList.add('ship');
+			if (isMainPlayer) {
+				shipDiv.dataset.ownShip = 'true';
+			} else {
+				shipDiv.classList.add('pointer-events-none');
+			}
 			if (shipObj.isSunk()) {
 				shipDiv.classList.add('ship-sunk');
 			}

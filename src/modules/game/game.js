@@ -80,6 +80,7 @@ const game = (() => {
 
 	const _handleStartClick = () => {
 		_newRound(true, true);
+		dom.disableOwnShipsClick();
 		dom.removeOptions(_handleStartClick, _handleRandomiseClick);
 	};
 
