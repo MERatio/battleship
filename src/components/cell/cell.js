@@ -9,7 +9,8 @@ const cell = (
 	col,
 	handleCellAttack,
 	handleShipDragStart,
-	handleCellDrop
+	handleCellDrop,
+	handleShipClick
 ) => {
 	const cellDiv = document.createElement('div');
 	cellDiv.classList.add('cell');
@@ -35,6 +36,7 @@ const cell = (
 				shipDiv.dataset.shipId = shipObj.id;
 				shipDiv.setAttribute('draggable', 'true');
 				shipDiv.addEventListener('dragstart', handleShipDragStart);
+				shipDiv.addEventListener('click', handleShipClick);
 			} else {
 				shipDiv.classList.add('pointer-events-none');
 			}
@@ -46,7 +48,7 @@ const cell = (
 			}
 			shipObj.parts.forEach((part) => {
 				const partDiv = document.createElement('div');
-				partDiv.classList.add('part');
+				partDiv.classList.add('part', 'pointer-events-none');
 				if (helpers.isFunctionalPart && isMainPlayer) {
 					partDiv.classList.add('part-functional');
 				} else if (helpers.isPartHit(part)) {

@@ -8,7 +8,8 @@ const gameboard = (
 	isMainPlayer,
 	handleCellAttack,
 	handleShipDragStart,
-	handleCellDrop
+	handleCellDrop,
+	handleShipClick
 ) => {
 	const gameboardDiv = document.createElement('div');
 	gameboardDiv.classList.add('gameboard');
@@ -29,7 +30,8 @@ const gameboard = (
 					colIndex,
 					handleCellAttack,
 					handleShipDragStart,
-					handleCellDrop
+					handleCellDrop,
+					handleShipClick
 				)
 			);
 		});

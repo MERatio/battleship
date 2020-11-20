@@ -15,7 +15,8 @@ const dom = (() => {
 		playerInfo,
 		handleCellAttack = null,
 		handleShipDragStart = null,
-		handleCellDrop = null
+		handleCellDrop = null,
+		handleShipClick = null
 	) => {
 		playerInfo.renderTo.innerHTML = '';
 		playerInfo.renderTo.appendChild(
@@ -26,7 +27,8 @@ const dom = (() => {
 				playerInfo.isMainPlayer,
 				handleCellAttack,
 				handleShipDragStart,
-				handleCellDrop
+				handleCellDrop,
+				handleShipClick
 			)
 		);
 	};
@@ -53,13 +55,15 @@ const dom = (() => {
 		handleStartClick,
 		handleRandomiseClick,
 		handleShipDragStart,
-		handleCellDrop
+		handleCellDrop,
+		handleShipClick
 	) => {
 		renderGameboard(
 			playersInfo.player1,
 			null,
 			handleShipDragStart,
-			handleCellDrop
+			handleCellDrop,
+			handleShipClick
 		);
 		enableGameboard('gameboard1');
 		start.addEventListener('click', handleStartClick);

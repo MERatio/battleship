@@ -58,7 +58,8 @@ const game = (() => {
 			playersInfo.player1,
 			null,
 			_handleShipDragStart,
-			_handleCellDrop
+			_handleCellDrop,
+			_handleShipClick
 		);
 		dom.renderGameboard(playersInfo.player2, _handleCellAttack);
 	};
@@ -96,7 +97,8 @@ const game = (() => {
 			playersInfo.player1,
 			null,
 			_handleShipDragStart,
-			_handleCellDrop
+			_handleCellDrop,
+			_handleShipClick
 		);
 		dom.enableGameboard('gameboard1');
 	};
@@ -154,7 +156,33 @@ const game = (() => {
 			playersInfo.player1,
 			null,
 			_handleShipDragStart,
-			_handleCellDrop
+			_handleCellDrop,
+			_handleShipClick
+		);
+		dom.enableGameboard('gameboard1');
+	};
+
+	const _handleShipClick = (e) => {
+		const target = e.target;
+		const shipId = target.dataset.shipId;
+		const shipObj = gameboard1.findShip(shipId);
+		const shipDiv = document.querySelector(`[data-ship-id="${shipId}"]`);
+		const shipDivCell = shipDiv.parentNode;
+		const row = parseInt(shipDivCell.dataset.row, 10);
+		const col = parseInt(shipDivCell.dataset.col, 10);
+
+		gameboard1.removeShip(shipObj);
+		shipObj.isHorizontal = !shipObj.isHorizontal;
+		if (!gameboard1.placeShip(shipObj, row, col)) {
+			shipObj.isHorizontal = !shipObj.isHorizontal;
+			gameboard1.placeShip(shipObj, row, col);
+		}
+		dom.renderGameboard(
+			playersInfo.player1,
+			null,
+			_handleShipDragStart,
+			_handleCellDrop,
+			_handleShipClick
 		);
 		dom.enableGameboard('gameboard1');
 	};
@@ -166,7 +194,8 @@ const game = (() => {
 			_handleStartClick,
 			_handleRandomiseClick,
 			_handleShipDragStart,
-			_handleCellDrop
+			_handleCellDrop,
+			_handleShipClick
 		);
 	};
 
