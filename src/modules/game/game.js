@@ -60,7 +60,7 @@ const game = (() => {
 			_handleShipDragStart,
 			_handleCellDrop
 		);
-		dom.renderGameboard(playersInfo.player2, handleCellAttack);
+		dom.renderGameboard(playersInfo.player2, _handleCellAttack);
 	};
 
 	const _newRound = (isFirstRound, isNewPlayer) => {
@@ -101,7 +101,7 @@ const game = (() => {
 		dom.enableGameboard('gameboard1');
 	};
 
-	const handleCellAttack = (e) => {
+	const _handleCellAttack = (e) => {
 		if (winner) {
 			return;
 		}
