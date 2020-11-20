@@ -8,7 +8,10 @@ const player = () => {
 				let row = Math.floor(Math.random() * 10);
 				let col = Math.floor(Math.random() * 10);
 				isShipPlaced = ownGameboard.placeShip(ship, row, col);
-				ship.isHorizontal = !ship.isHorizontal;
+				if (!isShipPlaced) {
+					ship.isHorizontal = !ship.isHorizontal;
+					isShipPlaced = ownGameboard.placeShip(ship, row, col);
+				}
 			}
 		}
 	};
