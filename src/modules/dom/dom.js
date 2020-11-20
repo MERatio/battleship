@@ -11,7 +11,12 @@ const dom = (() => {
 	const start = document.getElementById('start');
 	const randomise = document.getElementById('randomise');
 
-	const renderGameboard = (playerInfo, handleCellAttack = null) => {
+	const renderGameboard = (
+		playerInfo,
+		handleCellAttack = null,
+		handleShipDragStart = null,
+		handleCellDrop = null
+	) => {
 		playerInfo.renderTo.innerHTML = '';
 		playerInfo.renderTo.appendChild(
 			gameboard(
@@ -19,7 +24,9 @@ const dom = (() => {
 				playerInfo.name,
 				playerInfo.isDisabled(),
 				playerInfo.isMainPlayer,
-				handleCellAttack
+				handleCellAttack,
+				handleShipDragStart,
+				handleCellDrop
 			)
 		);
 	};
@@ -41,8 +48,19 @@ const dom = (() => {
 		randomise.remove();
 	};
 
-	const init = (playersInfo, handleStartClick, handleRandomiseClick) => {
-		dom.renderGameboard(playersInfo.player1);
+	const init = (
+		playersInfo,
+		handleStartClick,
+		handleRandomiseClick,
+		handleShipDragStart,
+		handleCellDrop
+	) => {
+		renderGameboard(
+			playersInfo.player1,
+			null,
+			handleShipDragStart,
+			handleCellDrop
+		);
 		enableGameboard('gameboard1');
 		start.addEventListener('click', handleStartClick);
 		randomise.addEventListener('click', handleRandomiseClick);

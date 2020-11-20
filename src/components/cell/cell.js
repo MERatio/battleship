@@ -1,11 +1,28 @@
 import './cell.css';
 import helpers from '../../modules/helpers/helpers';
 
-const cell = (cell, gameboardObj, isMainPlayer, row, col, handleCellAttack) => {
+const cell = (
+	cell,
+	gameboardObj,
+	isMainPlayer,
+	row,
+	col,
+	handleCellAttack,
+	handleShipDragStart,
+	handleCellDrop
+) => {
 	const cellDiv = document.createElement('div');
 	cellDiv.classList.add('cell');
 	cellDiv.dataset.row = row;
 	cellDiv.dataset.col = col;
+	if (isMainPlayer) {
+		const allowDrop = (e) => {
+			// Prevent default to allow drop
+			e.preventDefault();
+		};
+		cellDiv.addEventListener('dragover', allowDrop);
+		cellDiv.addEventListener('drop', handleCellDrop);
+	}
 	if (!helpers.isCellVacant(cell)) {
 		if (helpers.isMissedCell(cell)) {
 			cellDiv.classList.add('cell-missed');
@@ -15,6 +32,9 @@ const cell = (cell, gameboardObj, isMainPlayer, row, col, handleCellAttack) => {
 			shipDiv.classList.add('ship');
 			if (isMainPlayer) {
 				shipDiv.dataset.ownShip = 'true';
+				shipDiv.dataset.shipId = shipObj.id;
+				shipDiv.setAttribute('draggable', 'true');
+				shipDiv.addEventListener('dragstart', handleShipDragStart);
 			} else {
 				shipDiv.classList.add('pointer-events-none');
 			}

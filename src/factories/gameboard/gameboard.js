@@ -10,7 +10,7 @@ const gameboard = (size) => {
 	};
 
 	const gameboard = _matrix(size);
-	const ships = [];
+	let ships = [];
 
 	const _containsInvalidCoordinates = (...coors) => {
 		return coors.some((coor) => coor < 0 || coor > size - 1);
@@ -36,21 +36,6 @@ const gameboard = (size) => {
 		return true;
 	};
 
-	const _isPlacementValid = (shipLength, isHorizontal, row, col) => {
-		for (let i = 0; i < shipLength; i++) {
-			if (isHorizontal) {
-				if (!_isCellValid(row, col + i)) {
-					return false;
-				}
-			} else {
-				if (!_isCellValid(row + i, col)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	};
-
 	const _placeParts = (parts, isHorizontal, row, col) => {
 		for (let i = 0; i < parts.length; i++) {
 			if (isHorizontal) {
@@ -69,8 +54,23 @@ const gameboard = (size) => {
 
 	const getShips = () => ships;
 
+	const isPlacementValid = (shipLength, isHorizontal, row, col) => {
+		for (let i = 0; i < shipLength; i++) {
+			if (isHorizontal) {
+				if (!_isCellValid(row, col + i)) {
+					return false;
+				}
+			} else {
+				if (!_isCellValid(row + i, col)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	};
+
 	const placeShip = (ship, row, col) => {
-		if (_isPlacementValid(ship.length, ship.isHorizontal, row, col)) {
+		if (isPlacementValid(ship.length, ship.isHorizontal, row, col)) {
 			ships.push(ship);
 			_placeParts(ship.parts, ship.isHorizontal, row, col);
 			return true;
@@ -107,15 +107,29 @@ const gameboard = (size) => {
 		ships.length = 0;
 	};
 
+	const removeShip = (ship) => {
+		const shipId = ship.id;
+		for (let i = 0; i < gameboard.length; i++) {
+			for (let j = 0; j < gameboard[i].length; j++) {
+				if (gameboard[i][j] && gameboard[i][j].shipId === shipId) {
+					gameboard[i][j] = null;
+				}
+			}
+		}
+		ships = ships.filter((el) => el !== ship);
+	};
+
 	return {
 		size,
 		findShip,
 		getGameboard,
 		getShips,
+		isPlacementValid,
 		placeShip,
 		receiveAttack,
 		areAllShipsDestroyed,
 		emptyGameboard,
+		removeShip,
 	};
 };
 

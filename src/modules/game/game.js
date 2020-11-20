@@ -54,7 +54,12 @@ const game = (() => {
 	};
 
 	const _updateGameboard = () => {
-		dom.renderGameboard(playersInfo.player1);
+		dom.renderGameboard(
+			playersInfo.player1,
+			null,
+			_handleShipDragStart,
+			_handleCellDrop
+		);
 		dom.renderGameboard(playersInfo.player2, handleCellAttack);
 	};
 
@@ -87,7 +92,12 @@ const game = (() => {
 	const _handleRandomiseClick = () => {
 		gameboard1.emptyGameboard();
 		player1.randomPlaceShips(gameboard1);
-		dom.renderGameboard(playersInfo.player1);
+		dom.renderGameboard(
+			playersInfo.player1,
+			null,
+			_handleShipDragStart,
+			_handleCellDrop
+		);
 		dom.enableGameboard('gameboard1');
 	};
 
@@ -105,9 +115,59 @@ const game = (() => {
 		}
 	};
 
+	const _handleShipDragStart = (e) => {
+		e.dataTransfer.setData('text/plain', e.target.dataset.shipId);
+	};
+
+	const _handleCellDrop = (e) => {
+		// Prevent default action (open as link when i drop a ship in a cell)
+		e.preventDefault();
+		const target = e.target;
+		if (!target.classList.contains('cell')) {
+			return;
+		}
+		const shipId = e.dataTransfer.getData('text/plain');
+		const shipObj = gameboard1.findShip(shipId);
+		const shipDiv = document.querySelector(`[data-ship-id="${shipId}"]`);
+		const shipDivCell = shipDiv.parentNode;
+		const row = parseInt(target.dataset.row, 10);
+		const col = parseInt(target.dataset.col, 10);
+		const rowOld = parseInt(shipDivCell.dataset.row, 10);
+		const colOld = parseInt(shipDivCell.dataset.col, 10);
+
+		gameboard1.removeShip(shipObj);
+
+		// Append the dragged ship to selected cell
+		if (
+			gameboard1.isPlacementValid(
+				shipObj.length,
+				shipObj.isHorizontal,
+				row,
+				col
+			)
+		) {
+			gameboard1.placeShip(shipObj, row, col);
+		} else {
+			gameboard1.placeShip(shipObj, rowOld, colOld);
+		}
+		dom.renderGameboard(
+			playersInfo.player1,
+			null,
+			_handleShipDragStart,
+			_handleCellDrop
+		);
+		dom.enableGameboard('gameboard1');
+	};
+
 	const init = () => {
 		_randomPlaceShips(gameboard1, gameboard2);
-		dom.init(playersInfo, _handleStartClick, _handleRandomiseClick);
+		dom.init(
+			playersInfo,
+			_handleStartClick,
+			_handleRandomiseClick,
+			_handleShipDragStart,
+			_handleCellDrop
+		);
 	};
 
 	return { init };

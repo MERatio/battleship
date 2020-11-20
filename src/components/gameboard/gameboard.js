@@ -6,7 +6,9 @@ const gameboard = (
 	name,
 	isDisabled,
 	isMainPlayer,
-	handleCellAttack
+	handleCellAttack,
+	handleShipDragStart,
+	handleCellDrop
 ) => {
 	const gameboardDiv = document.createElement('div');
 	gameboardDiv.classList.add('gameboard');
@@ -25,7 +27,9 @@ const gameboard = (
 					isMainPlayer,
 					rowIndex,
 					colIndex,
-					handleCellAttack
+					handleCellAttack,
+					handleShipDragStart,
+					handleCellDrop
 				)
 			);
 		});

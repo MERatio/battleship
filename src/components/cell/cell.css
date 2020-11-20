@@ -23,6 +23,10 @@
   display: grid;
 }
 
+[data-own-ship='true'] {
+  cursor: pointer;
+}
+
 .ship-horizontal {
   grid-auto-flow: column;
 }
