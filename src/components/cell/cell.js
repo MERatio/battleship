@@ -21,8 +21,8 @@ const cell = (cell, gameboardObj, isMainPlayer, row, col, handleCellAttack) => {
 			if (shipObj.isSunk()) {
 				shipDiv.classList.add('ship-sunk');
 			}
-			if (!shipObj.isHorizontal) {
-				shipDiv.classList.add('ship-vertical');
+			if (shipObj.isHorizontal) {
+				shipDiv.classList.add('ship-horizontal');
 			}
 			shipObj.parts.forEach((part) => {
 				const partDiv = document.createElement('div');

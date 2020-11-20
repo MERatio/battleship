@@ -1,91 +1,91 @@
 :root {
-	--belize-hole: #2980b9;
-	--emerald: #2ecc71;
-	--nephritis: #27ae60;
-	--alizarin: #e74c3c;
-	--wet-asphalt: #34495e;
-	--cell-size: 4rem;
+  --belize-hole: #2980b9;
+  --emerald: #2ecc71;
+  --nephritis: #27ae60;
+  --alizarin: #e74c3c;
+  --wet-asphalt: #34495e;
+  --cell-size: 4rem;
 }
 
 .cell {
-	position: relative;
-	width: var(--cell-size);
-	height: var(--cell-size);
-	border: 1px solid var(--belize-hole);
+  position: relative;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid var(--belize-hole);
 }
 
 .cell-missed {
 }
 
 .ship {
-	position: absolute;
-	z-index: 99;
-	display: grid;
+  position: absolute;
+  z-index: 99;
+  display: grid;
 }
 
-.ship-vertical {
-	grid-auto-flow: column;
+.ship-horizontal {
+  grid-auto-flow: column;
 }
 
 .ship-sunk > .part {
-	background-color: var(--wet-asphalt);
+  background-color: var(--wet-asphalt);
 }
 
 .part {
-	position: relative;
-	width: var(--cell-size);
-	height: var(--cell-size);
+  position: relative;
+  width: var(--cell-size);
+  height: var(--cell-size);
 }
 
 .part-functional {
-	background-color: var(--emerald);
-	border: 1px solid var(--nephritis);
+  background-color: var(--emerald);
+  border: 1px solid var(--nephritis);
 }
 
 .part-hit {
-	background-color: var(--alizarin);
+  background-color: var(--alizarin);
 }
 
 .cell-missed:after,
 .part-hit:after,
 .ship-sunk > *:after {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	content: '\274c'; /* use the hex value here... */
-	font-size: var(--cell-size);
-	line-height: var(--cell-size);
-	text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '\274c'; /* use the hex value here... */
+  font-size: var(--cell-size);
+  line-height: var(--cell-size);
+  text-align: center;
 }
 
 /* Media queries */
 
 /* 900px */
 @media only screen and (max-width: 56.25em) {
-	html {
-		font-size: 50%;
-	}
+  html {
+    font-size: 50%;
+  }
 }
 
 /* 700px */
 @media only screen and (max-width: 43.75em) {
-	html {
-		font-size: 40%;
-	}
+  html {
+    font-size: 40%;
+  }
 }
 
 /* 560px */
 @media only screen and (max-width: 35em) {
-	html {
-		font-size: 30%;
-	}
+  html {
+    font-size: 30%;
+  }
 }
 
 /* 400px */
 @media only screen and (max-width: 25em) {
-	html {
-		font-size: 25%;
-	}
+  html {
+    font-size: 25%;
+  }
 }
