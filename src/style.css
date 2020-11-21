@@ -1,3 +1,7 @@
+:root {
+	--sea-blue: #006994;
+}
+
 *,
 *:before,
 *:after {
@@ -9,6 +13,7 @@
 body {
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
+	background-color: var(--sea-blue);
 }
 
 html {
@@ -19,11 +24,20 @@ html {
 	pointer-events: none;
 }
 
+.display-none {
+	display: none;
+}
+
 .app {
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .gameboards {
+	width: 100%;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 }

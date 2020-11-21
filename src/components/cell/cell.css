@@ -1,7 +1,5 @@
 :root {
-  --belize-hole: #2980b9;
   --emerald: #2ecc71;
-  --nephritis: #27ae60;
   --alizarin: #e74c3c;
   --wet-asphalt: #34495e;
   --cell-size: 4rem;
@@ -11,7 +9,7 @@
   position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
-  border: 1px solid var(--belize-hole);
+  background-color: #fff;
 }
 
 .cell-missed {
@@ -21,6 +19,7 @@
   position: absolute;
   z-index: 99;
   display: grid;
+  gap: 1px;
 }
 
 [data-own-ship='true'] {
@@ -43,7 +42,6 @@
 
 .part-functional {
   background-color: var(--emerald);
-  border: 1px solid var(--nephritis);
 }
 
 .part-hit {
