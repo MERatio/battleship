@@ -1,0 +1,32 @@
+.ship {
+  position: absolute;
+  z-index: 99;
+  display: grid;
+  gap: 1px;
+}
+
+[data-own-ship='true'] {
+  cursor: pointer;
+}
+
+.ship-horizontal {
+  grid-auto-flow: column;
+}
+
+.ship-sunk > .part {
+  background-color: var(--wet-asphalt);
+}
+
+.part {
+  position: relative;
+  width: var(--cell-size);
+  height: var(--cell-size);
+}
+
+.part-functional {
+  background-color: var(--emerald);
+}
+
+.part-hit {
+  background-color: var(--alizarin);
+}
