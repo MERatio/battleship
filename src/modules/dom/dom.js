@@ -50,6 +50,12 @@ const dom = (() => {
 		randomise.remove();
 	};
 
+	const style = (add, el, styles) => {
+		add
+			? styles.forEach((style) => el.classList.add(style))
+			: styles.forEach((style) => el.classList.remove(style));
+	};
+
 	const init = (
 		playersInfo,
 		handleStartClick,
@@ -66,6 +72,7 @@ const dom = (() => {
 			handleShipClick
 		);
 		enableGameboard('gameboard1');
+		style(true, gameboard2Container, ['display-none']);
 		start.addEventListener('click', handleStartClick);
 		randomise.addEventListener('click', handleRandomiseClick);
 	};
@@ -77,6 +84,7 @@ const dom = (() => {
 		enableGameboard,
 		disableOwnShipsClick,
 		removeOptions,
+		style,
 		init,
 	};
 })();

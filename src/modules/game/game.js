@@ -85,6 +85,7 @@ const game = (() => {
 	};
 
 	const _handleStartClick = () => {
+		dom.style(false, dom.gameboard2Container, ['display-none']);
 		_newRound(true, true);
 		dom.disableOwnShipsClick();
 		dom.removeOptions(_handleStartClick, _handleRandomiseClick);
