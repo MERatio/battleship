@@ -46,6 +46,41 @@ const gameboard = (size) => {
 		}
 	};
 
+	const _findShipCoordinates = (ship) => {
+		for (let i = 0; i < size; i++) {
+			for (let j = 0; j < size; j++) {
+				if (gameboard[i][j] === ship.parts[0]) {
+					return [i, j];
+				}
+			}
+		}
+	};
+
+	const _attackCellsThatSurroundsACell = (row, col) => {
+		for (let i = row - 1; i <= row + 1; i++) {
+			for (let j = col - 1; j <= col + 1; j++) {
+				if (
+					!_containsInvalidCoordinates(i, j) &&
+					helpers.isCellVacant(gameboard[i][j])
+				) {
+					receiveAttack(i, j);
+				}
+			}
+		}
+	};
+
+	const _attackCellsThatSurroundsAShip = (ship, shipRow, shipCol) => {
+		if (ship.isHorizontal) {
+			for (let partCol = shipCol; partCol < shipCol + ship.length; partCol++) {
+				_attackCellsThatSurroundsACell(shipRow, partCol);
+			}
+		} else {
+			for (let partRow = shipRow; partRow < shipRow + ship.length; partRow++) {
+				_attackCellsThatSurroundsACell(partRow, shipCol);
+			}
+		}
+	};
+
 	const findShip = (shipId) => {
 		return ships.find((ship) => ship.id === shipId);
 	};
@@ -86,6 +121,10 @@ const gameboard = (size) => {
 			} else if (helpers.isFunctionalPart(cell)) {
 				const ship = findShip(cell.shipId);
 				ship.hit(cell.index);
+				if (ship.isSunk()) {
+					const [shipRow, shipCol] = _findShipCoordinates(ship);
+					_attackCellsThatSurroundsAShip(ship, shipRow, shipCol);
+				}
 			}
 			return true;
 		}

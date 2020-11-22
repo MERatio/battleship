@@ -109,6 +109,34 @@ test('gameboard receiveAttack if the cell is already attacked', () => {
 	expect(gameboardObj.receiveAttack(5, 5)).toBe(false);
 });
 
+test('gameboard receiveAttack should attack surround cell if the attacked ship is destroyed', () => {
+	const shipRow = 5;
+	const shipCol = 5;
+	// Sink a ship
+	expect(gameboardObj.placeShip(shipObj, shipRow, shipCol)).toBe(true);
+	for (let partCol = shipCol; partCol < shipCol + shipObj.length; partCol++) {
+		expect(gameboardObj.receiveAttack(shipRow, partCol)).toBe(true);
+	}
+	expect(shipObj.isSunk()).toBe(true);
+	// Assert if 1x adjacent cell of sunk ship is attacked,
+	for (let partCol = shipCol; partCol < shipCol + shipObj.length; partCol++) {
+		for (let i = shipRow - 1; i <= shipRow + 1; i++) {
+			for (let j = partCol - 1; j <= partCol + 1; j++) {
+				if (
+					i > -1 &&
+					i < gameboardObj.size &&
+					j > -1 &&
+					j < gameboardObj.size &&
+					!shipObj.parts.includes(gameboardObj.getGameboard()[i][j]) &&
+					gameboardObj.getGameboard()[i][j] !== null
+				) {
+					expect(gameboardObj.getGameboard()[i][j]).toBe('missed');
+				}
+			}
+		}
+	}
+});
+
 // areAllShipsDestroyed method
 
 test('gameboard areAllShipsDestroyed', () => {
