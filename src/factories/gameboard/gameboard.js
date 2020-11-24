@@ -12,20 +12,16 @@ const gameboard = (size) => {
 	const gameboard = _matrix(size);
 	let ships = [];
 
-	const _containsInvalidCoordinates = (...coors) => {
-		return coors.some((coor) => coor < 0 || coor > size - 1);
-	};
-
 	const _isCellValid = (row, col) => {
 		if (
-			_containsInvalidCoordinates(row, col) ||
+			containsInvalidCoordinates(row, col) ||
 			!helpers.isCellVacant(gameboard[row][col])
 		) {
 			return false;
 		}
 		for (let i = row - 1; i <= row + 1; i++) {
 			for (let j = col - 1; j <= col + 1; j++) {
-				if (_containsInvalidCoordinates(i, j)) {
+				if (containsInvalidCoordinates(i, j)) {
 					continue;
 				}
 				if (!helpers.isCellVacant(gameboard[i][j])) {
@@ -60,7 +56,7 @@ const gameboard = (size) => {
 		for (let i = row - 1; i <= row + 1; i++) {
 			for (let j = col - 1; j <= col + 1; j++) {
 				if (
-					!_containsInvalidCoordinates(i, j) &&
+					!containsInvalidCoordinates(i, j) &&
 					helpers.isCellVacant(gameboard[i][j])
 				) {
 					receiveAttack(i, j);
@@ -79,6 +75,10 @@ const gameboard = (size) => {
 				_attackCellsThatSurroundsACell(partRow, shipCol);
 			}
 		}
+	};
+
+	const containsInvalidCoordinates = (...coors) => {
+		return coors.some((coor) => coor < 0 || coor > size - 1);
 	};
 
 	const findShip = (shipId) => {
@@ -160,6 +160,7 @@ const gameboard = (size) => {
 
 	return {
 		size,
+		containsInvalidCoordinates,
 		findShip,
 		getGameboard,
 		getShips,
