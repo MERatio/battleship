@@ -29,7 +29,7 @@ const ship = (
 	shipObj.parts.forEach((part) => {
 		const partDiv = document.createElement('div');
 		partDiv.classList.add('part', 'pointer-events-none');
-		if (helpers.isFunctionalPart && isMainPlayer) {
+		if (helpers.isFunctionalPart) {
 			partDiv.classList.add('part-functional');
 		} else if (helpers.isPartHit(part)) {
 			partDiv.classList.remove('part-functional');

@@ -28,7 +28,13 @@ const cell = (
 	if (!helpers.isCellVacant(cell)) {
 		if (helpers.isMissedCell(cell)) {
 			cellDiv.classList.add('cell-missed');
-		} else if (helpers.isPart(cell) && cell.index === 0) {
+		} else if (
+			(isMainPlayer && helpers.isPart(cell) && cell.index === 0) ||
+			(!isMainPlayer &&
+				helpers.isPart(cell) &&
+				cell.index === 0 &&
+				gameboardObj.findShip(cell.shipId).isSunk())
+		) {
 			const shipDiv = ship(
 				cell,
 				gameboardObj,
@@ -37,6 +43,8 @@ const cell = (
 				handleShipClick
 			);
 			cellDiv.appendChild(shipDiv);
+		} else if (!isMainPlayer && helpers.isPart(cell) && cell.isHit) {
+			cellDiv.classList.add('part-hit');
 		}
 	}
 	if (!isMainPlayer && handleCellAttack) {
