@@ -20,7 +20,7 @@ const helpers = (() => {
 	};
 
 	const isCellVacant = (cell) => {
-		return cell === null || cell === undefined;
+		return cell === null;
 	};
 
 	const isMissedCell = (cell) => {
