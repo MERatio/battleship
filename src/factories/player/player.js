@@ -20,12 +20,14 @@ const player = () => {
 		let isAttackValid = false;
 		let row;
 		let col;
+		let cell;
 		while (!isAttackValid) {
 			row = Math.floor(Math.random() * 10);
 			col = Math.floor(Math.random() * 10);
-			isAttackValid = enemyGameboard.receiveAttack(row, col);
+			cell = enemyGameboard.getGameboard()[row][col];
+			isAttackValid = helpers.isValidCellToAttack(cell);
 		}
-		const cell = enemyGameboard.getGameboard()[row][col];
+		attack(enemyGameboard, row, col);
 		return helpers.isPartHit(cell);
 	};
 
