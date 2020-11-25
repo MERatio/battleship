@@ -17,7 +17,16 @@ beforeEach(() => {
 });
 
 test('player randomPlaceShips method', () => {
+	let partsCounter = 0;
 	aiObj.randomPlaceShips(aiBoard);
+	aiBoard.getGameboard().forEach((row) => {
+		row.forEach((cell) => {
+			if (cell && cell.shipId) {
+				partsCounter += 1;
+			}
+		});
+	});
+	expect(partsCounter).toBe(20);
 	expect(aiBoard.getShips().length).toBe(10);
 });
 
@@ -42,7 +51,7 @@ test('player randomAttack method', () => {
 		row.forEach((cell) => {
 			if (cell === 'missed') {
 				missedAttack += 1;
-			} else if (cell.isHit) {
+			} else if (cell && cell.isHit) {
 				hitCounter += 1;
 			}
 		});
