@@ -32,10 +32,9 @@ const helpers = (() => {
 	};
 
 	const isValidCellToAttack = (cell) => {
-		if (helpers.isMissedCell(cell)) {
-			return false;
-		}
-		return helpers.isCellVacant(cell) || helpers.isFunctionalPart(cell);
+		return cell === undefined || isMissedCell(cell) || isPartHit(cell)
+			? false
+			: true;
 	};
 
 	const isPartHit = (part) => {
@@ -49,10 +48,7 @@ const helpers = (() => {
 	};
 
 	const isPart = (cell) => {
-		if (isCellVacant(cell) || isMissedCell(cell)) {
-			return false;
-		}
-		return !!cell.shipId;
+		return cell && !!cell.shipId;
 	};
 
 	return {
