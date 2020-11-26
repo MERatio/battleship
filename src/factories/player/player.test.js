@@ -37,7 +37,8 @@ test('player randomAttack method', () => {
 	const withVacantCell = (gameboard) => {
 		for (let row = 0; row < gameboard.size; row++) {
 			for (let col = 0; col < gameboard.size; col++) {
-				if (gameboard.getGameboard()[row][col] === null) {
+				const cell = gameboard.getGameboard()[row][col];
+				if ((cell && cell.shipId && !cell.isHit) || cell === null) {
 					return true;
 				}
 			}
