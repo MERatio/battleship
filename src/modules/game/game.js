@@ -109,8 +109,8 @@ const game = (() => {
 			return;
 		}
 		const target = e.target;
-		const row = target.dataset.row;
-		const col = target.dataset.col;
+		const row = parseInt(target.dataset.row, 10);
+		const col = parseInt(target.dataset.col, 10);
 		const cell = activeGameboard.getGameboard()[row][col];
 		if (helpers.isValidCellToAttack(cell)) {
 			const itHit = activePlayer.attack(activeGameboard, row, col);
