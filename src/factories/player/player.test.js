@@ -34,7 +34,7 @@ test('player randomAttack method', () => {
 	let missedAttack = 0;
 	let hitCounter = 0;
 	playerObj.randomPlaceShips(playerBoard);
-	const withVacantCell = (gameboard) => {
+	const withHealthyCell = (gameboard) => {
 		for (let row = 0; row < gameboard.size; row++) {
 			for (let col = 0; col < gameboard.size; col++) {
 				const cell = gameboard.getGameboard()[row][col];
@@ -45,7 +45,7 @@ test('player randomAttack method', () => {
 		}
 		return false;
 	};
-	while (withVacantCell(playerBoard)) {
+	while (withHealthyCell(playerBoard)) {
 		aiObj.randomAttack(playerBoard);
 	}
 	playerBoard.getGameboard().forEach((row) => {
