@@ -27,8 +27,7 @@ const player = () => {
 			cell = enemyGameboard.getGameboard()[row][col];
 			isAttackValid = helpers.isValidCellToAttack(cell);
 		}
-		attack(enemyGameboard, row, col);
-		return helpers.isPartHit(cell);
+		return attack(enemyGameboard, row, col);
 	};
 
 	const attack = (enemyGameboard, row, col) => {
