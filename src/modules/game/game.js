@@ -75,13 +75,13 @@ const game = (() => {
 		if (!isFirstRound && isNewPlayer) {
 			_switchActivePlayer();
 		}
+		_updateGameboard();
 		if (activePlayer === player2) {
 			const itHit = player2.randomAttack(gameboard1);
 			setTimeout(() => {
 				_newRound(false, !itHit);
 			}, 500);
 		}
-		_updateGameboard();
 	};
 
 	const _handleStartClick = () => {
