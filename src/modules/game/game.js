@@ -77,9 +77,9 @@ const game = (() => {
 		}
 		_updateGameboard();
 		if (activePlayer === player2) {
-			const itHit = player2.randomAttack(gameboard1);
+			const isPartHit = player2.computerAttack(gameboard1);
 			setTimeout(() => {
-				_newRound(false, !itHit);
+				_newRound(false, !isPartHit);
 			}, 500);
 		}
 	};
