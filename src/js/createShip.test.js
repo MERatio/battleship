@@ -7,6 +7,14 @@ beforeEach(() => {
   ship = createShip(SHIP_LENGTH);
 });
 
+it("has required properties, and methods", () => {
+  expect(ship).toMatchObject({
+    getLength: expect.any(Function),
+    hit: expect.any(Function),
+    isSunk: expect.any(Function),
+  });
+});
+
 describe(".getLength()", () => {
   it("returns the length", () => {
     expect(ship.getLength()).toBe(SHIP_LENGTH);

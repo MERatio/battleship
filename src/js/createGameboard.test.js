@@ -7,6 +7,15 @@ beforeEach(() => {
   gameboard = createGameboard();
 });
 
+it("has required properties, and methods", () => {
+  expect(gameboard).toMatchObject({
+    getBoard: expect.any(Function),
+    placeShip: expect.any(Function),
+    receiveAttack: expect.any(Function),
+    areAllShipsSunk: expect.any(Function),
+  });
+});
+
 describe(".getBoard()", () => {
   it("returns 2d array board full of null initially", () => {
     expect(gameboard.getBoard().length).toBe(10);
