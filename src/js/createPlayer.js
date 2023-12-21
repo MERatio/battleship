@@ -1,10 +1,7 @@
+import { getRandomIntInclusive } from "./helpers";
 import createGameboard from "./createGameboard";
 
 function createPlayer(type) {
-  function getRandomIntInclusive(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   function getRandomCoorsToAttack(board) {
     let rowIndex;
     let columnIndex;
