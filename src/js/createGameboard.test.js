@@ -148,3 +148,46 @@ describe(".areAllShipsSunk()", () => {
     expect(gameboard.areAllShipsSunk()).toBe(true);
   });
 });
+
+describe(".randomlyPlaceShips()", () => {
+  let carrier;
+  let battleship;
+  let cruiser;
+  let submarine;
+  let destroyer;
+  let ships;
+
+  beforeEach(() => {
+    carrier = createShip(5);
+    battleship = createShip(4);
+    cruiser = createShip(3);
+    submarine = createShip(3);
+    destroyer = createShip(2);
+    ships = [carrier, battleship, cruiser, submarine, destroyer];
+  });
+
+  it("places all ships", () => {
+    const placeShipSpy = jest.spyOn(gameboard, "placeShip");
+    gameboard.randomlyPlaceShips(ships);
+    const placeShipSuccessReturns = placeShipSpy.mock.results.filter(
+      (result) => result.value === undefined,
+    );
+    expect(placeShipSuccessReturns.length).toBe(5);
+  });
+
+  it("places the ships randomly", () => {
+    gameboard.randomlyPlaceShips(ships);
+    const board = gameboard.getBoard();
+    let rowsSubset = [];
+    for (let i = 0; i < 5; i++) {
+      const row = board[i];
+      rowsSubset = [...rowsSubset, ...row];
+    }
+    expect(rowsSubset.some((square) => square === null)).toBe(true);
+    expect(rowsSubset.some((square) => square !== null)).toBe(true);
+  });
+
+  it("returns undefined if successful", () => {
+    expect(gameboard.randomlyPlaceShips(ships)).toBeUndefined();
+  });
+});

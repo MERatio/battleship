@@ -1,3 +1,5 @@
+import { getRandomIntInclusive } from "./helpers";
+
 function createGameboard() {
   const BOARD_SIZE = 10;
   let board = Array.from({ length: BOARD_SIZE }, () =>
@@ -14,6 +16,12 @@ function createGameboard() {
     } else {
       board[rowIndex][columnIndex] = ship;
     }
+  }
+
+  function getRandomOrientation() {
+    const orientations = ["horizontal", "vertical"];
+    const randomIndex = Math.floor(Math.random() * orientations.length);
+    return orientations[randomIndex];
   }
 
   return {
@@ -51,6 +59,22 @@ function createGameboard() {
     },
     areAllShipsSunk() {
       return ships.every((ship) => ship.isSunk());
+    },
+    randomlyPlaceShips(ships) {
+      ships.forEach((ship) => {
+        let shipPlaced = false;
+        while (!shipPlaced) {
+          const rowIndex = getRandomIntInclusive(0, 9);
+          const columnIndex = getRandomIntInclusive(0, 9);
+          const orientation = getRandomOrientation();
+          try {
+            this.placeShip(rowIndex, columnIndex, orientation, ship);
+            shipPlaced = true;
+          } catch (err) {
+            // Intentional: I just want to call this.placeShip until that ship is placed.
+          }
+        }
+      });
     },
   };
 }
