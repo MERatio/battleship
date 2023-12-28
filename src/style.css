@@ -14,6 +14,10 @@ html {
   margin: 0;
 }
 
+.cursor-auto {
+  cursor: auto !important;
+}
+
 .container {
   max-width: 900px;
   padding: 0 10px;
