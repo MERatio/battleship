@@ -6,7 +6,7 @@ export function renderBoard(el, board, showShips) {
   boardDiv.classList.add("board");
   board.forEach((row, i) => {
     row.forEach((square, j) => {
-      const squareDiv = document.createElement("div");
+      const squareDiv = document.createElement("button");
       squareDiv.classList.add("square");
       if (
         showShips &&
