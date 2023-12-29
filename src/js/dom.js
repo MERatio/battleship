@@ -64,6 +64,7 @@ export function clearBoards(boardContainers, onSquareBtnClick) {
 export function disableBoard(boardContainer) {
   const squareBtns = boardContainer.querySelectorAll(".square");
   squareBtns.forEach((squareBtn) => {
+    squareBtn.classList.remove("cursor-pointer");
     squareBtn.setAttribute("disabled", "");
   });
 }

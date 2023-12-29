@@ -23,13 +23,13 @@ function renderNewBoards() {
   dom.renderBoard(
     dom.p1BoardContainer,
     p1.gameboard.getBoard(),
-    activePlayer === p1,
+    true,
     handleSquareBtnClick,
   );
   dom.renderBoard(
     dom.p2BoardContainer,
     p2.gameboard.getBoard(),
-    activePlayer === p2,
+    false,
     handleSquareBtnClick,
   );
 }
@@ -50,9 +50,7 @@ function playerAttack(player, rowIndex, columnIndex) {
         alert(`${winner === p1 ? "Player 1" : "Player 2"} wins!`);
       }, 0);
       gameOver = true;
-      dom.disableBoard(
-        activePlayer === p1 ? dom.p2BoardContainer : dom.p1BoardContainer,
-      );
+      dom.disableBoard(dom.p2BoardContainer);
       return;
     }
     if (activePlayer === p2) {
