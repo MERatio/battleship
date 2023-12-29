@@ -11,13 +11,17 @@ function createSquareBtn(
   const squareBtn = document.createElement("button");
   squareBtn.classList.add("square");
   if (isActivePlayerBoard) {
-    squareBtn.classList.add("cursor-auto");
     squareBtn.setAttribute("disabled", "");
     if (square && Object.prototype.hasOwnProperty.call(square, "isSunk")) {
       squareBtn.classList.add("ship");
     }
   } else {
-    squareBtn.addEventListener("click", onSquareBtnClick);
+    if (square !== "miss" && square !== "hit") {
+      squareBtn.classList.add("cursor-pointer");
+      squareBtn.addEventListener("click", onSquareBtnClick);
+    } else {
+      squareBtn.setAttribute("disabled", "");
+    }
   }
   if (square === "miss") {
     squareBtn.classList.add("miss");
@@ -60,7 +64,6 @@ export function clearBoards(boardContainers, onSquareBtnClick) {
 export function disableBoard(boardContainer) {
   const squareBtns = boardContainer.querySelectorAll(".square");
   squareBtns.forEach((squareBtn) => {
-    squareBtn.classList.add("cursor-auto");
     squareBtn.setAttribute("disabled", "");
   });
 }

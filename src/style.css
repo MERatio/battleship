@@ -17,8 +17,8 @@ html {
   margin: 0;
 }
 
-.cursor-auto {
-  cursor: auto !important;
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .container {
@@ -48,7 +48,6 @@ html {
 }
 
 .square {
-  cursor: pointer;
   background: none;
 }
 
