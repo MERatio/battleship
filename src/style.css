@@ -1,5 +1,7 @@
 :root {
   --gray-300: #d1d5db;
+  --blue-600: #2563eb;
+  --red-600: #dc2626;
 }
 
 html {
@@ -50,5 +52,13 @@ html {
 }
 
 .ship {
-  border: 1px solid #2563eb;
+  border: 1px solid var(--blue-600);
+}
+
+.miss {
+  background-color: var(--blue-600);
+}
+
+.hit {
+  background-color: var(--red-600);
 }
