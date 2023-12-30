@@ -17,7 +17,7 @@ function createSquareBtn(
     }
   } else {
     if (square !== "miss" && square !== "hit") {
-      squareBtn.classList.add("cursor-pointer");
+      squareBtn.classList.add("square-to-attack");
       squareBtn.addEventListener("click", onSquareBtnClick);
     } else {
       squareBtn.setAttribute("disabled", "");
@@ -64,7 +64,7 @@ export function clearBoards(boardContainers, onSquareBtnClick) {
 export function disableBoard(boardContainer) {
   const squareBtns = boardContainer.querySelectorAll(".square");
   squareBtns.forEach((squareBtn) => {
-    squareBtn.classList.remove("cursor-pointer");
+    squareBtn.classList.remove("square-to-attack");
     squareBtn.setAttribute("disabled", "");
   });
 }

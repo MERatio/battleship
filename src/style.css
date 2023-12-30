@@ -17,10 +17,6 @@ html {
   margin: 0;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
 .container {
   max-width: 900px;
   padding: 0 10px;
@@ -49,6 +45,14 @@ html {
 
 .square {
   background: none;
+}
+
+.square-to-attack {
+  cursor: pointer;
+}
+
+.square-to-attack:hover {
+  background-color: var(--gray-300);
 }
 
 .ship {
